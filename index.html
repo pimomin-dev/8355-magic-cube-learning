@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>8355 魔方任務｜第 1–13 關</title>
+<style>
+:root{
+  --bg:#f4f1e8; --panel:#fffdf8; --ink:#20313a; --muted:#65747a;
+  --teal:#2f7f78; --teal2:#dceeea; --orange:#df8b38; --line:#d9ddd6;
+  --shadow:0 14px 34px rgba(32,49,58,.12); --radius:22px;
+}
+*{box-sizing:border-box} body{margin:0;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;background:linear-gradient(135deg,#f7f4ec,#ecefe9);color:var(--ink);min-height:100vh}
+button{font:inherit} .app{max-width:1440px;margin:auto;padding:20px}.topbar{display:flex;align-items:center;gap:18px;margin-bottom:16px}.brand{font-weight:900;font-size:22px;letter-spacing:.04em}.brand small{font-size:12px;color:var(--muted);font-weight:600;display:block;margin-top:3px}.progress-wrap{flex:1}.progress-label{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:6px}.progress{height:11px;background:#dfe4df;border-radius:999px;overflow:hidden}.progress>div{height:100%;background:linear-gradient(90deg,var(--teal),#63a79f);width:0;transition:.35s}.reset{border:1px solid var(--line);background:transparent;padding:9px 13px;border-radius:12px;color:var(--muted);cursor:pointer}
+.layout{display:grid;grid-template-columns:290px minmax(520px,1fr) 360px;gap:16px}.panel{background:rgba(255,253,248,.94);border:1px solid rgba(255,255,255,.8);border-radius:var(--radius);box-shadow:var(--shadow)}
+.sidebar{padding:18px;max-height:calc(100vh - 100px);overflow:auto}.chapter{font-size:12px;color:var(--muted);font-weight:800;margin:12px 0 8px}.level-btn{width:100%;display:flex;align-items:center;gap:10px;border:0;background:transparent;padding:10px;border-radius:14px;text-align:left;cursor:pointer;color:var(--ink)}.level-btn:hover{background:#edf3ef}.level-btn.active{background:var(--teal2);color:#155f58}.level-btn.locked{opacity:.4;cursor:not-allowed}.level-num{width:29px;height:29px;border-radius:10px;background:#e7ebe7;display:grid;place-items:center;font-weight:900;font-size:13px}.active .level-num{background:var(--teal);color:white}.done .level-num{background:#244f4b;color:white}.level-name{font-size:14px;font-weight:800}.level-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.main{padding:22px;display:flex;flex-direction:column;min-height:760px}.mission-tag{font-size:12px;color:var(--teal);font-weight:900;letter-spacing:.08em}.mission-title{font-size:30px;font-weight:950;margin:8px 0 7px}.mission-desc{color:var(--muted);line-height:1.65;max-width:820px}.workspace-banner{display:flex;align-items:center;gap:10px;background:#fff4df;border:1px dashed #e2a75e;border-radius:15px;padding:10px 13px;margin-top:14px;font-size:13px}.workspace-icon{width:22px;height:22px;border:2px dashed var(--orange);border-radius:5px}
+.cube-stage{flex:1;display:grid;place-items:center;position:relative;padding:20px 0}.cube-net{display:grid;grid-template-columns:repeat(4,138px);grid-template-rows:repeat(3,138px);gap:10px;user-select:none}.face{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:5px;background:#26343a;padding:7px;border-radius:13px;box-shadow:0 8px 18px rgba(32,49,58,.16)}.face[data-face="U"]{grid-column:2;grid-row:1}.face[data-face="L"]{grid-column:1;grid-row:2}.face[data-face="F"]{grid-column:2;grid-row:2}.face[data-face="R"]{grid-column:3;grid-row:2}.face[data-face="B"]{grid-column:4;grid-row:2}.face[data-face="D"]{grid-column:2;grid-row:3}.face-label{position:absolute;font-weight:900;font-size:11px;color:#fff;opacity:.7;pointer-events:none}.sticker{border:0;border-radius:8px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.16),inset 0 2px 4px rgba(255,255,255,.35);cursor:pointer;position:relative;transition:.18s transform,.18s filter}.sticker:hover{transform:scale(.94);filter:brightness(1.06)}.sticker.selected{outline:4px solid var(--orange);outline-offset:2px}.sticker.target::after{content:"";position:absolute;inset:5px;border:3px dashed #1f3038;border-radius:5px;animation:pulse 1.15s infinite}.sticker.dim{filter:grayscale(.8) brightness(1.25);opacity:.34}.sticker.center-mark::after{content:"中心";position:absolute;inset:0;display:grid;place-items:center;font-size:9px;font-weight:900;color:rgba(20,30,35,.72)}@keyframes pulse{50%{opacity:.25}}
+.controls{border-top:1px solid var(--line);padding-top:16px}.move-row{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}.move{border:1px solid #cfd8d3;background:#fff;padding:9px 12px;border-radius:11px;font-weight:900;cursor:pointer;min-width:44px}.move:hover{background:var(--teal2)}.move:disabled{opacity:.35;cursor:not-allowed}.utility-row{display:flex;gap:9px;justify-content:center;margin-top:10px}.utility{border:0;background:#e8ece8;color:#45565d;padding:8px 12px;border-radius:10px;cursor:pointer}.timeline{margin-top:12px;display:flex;align-items:center;gap:6px;min-height:38px;overflow:auto;padding-bottom:4px}.timeline .step{background:#e9eeea;border-radius:9px;padding:6px 9px;font-weight:900;font-size:12px;white-space:nowrap}.timeline .empty{color:#94a09e;font-size:12px}
+.right{padding:20px;display:flex;flex-direction:column;gap:14px;max-height:calc(100vh - 100px);overflow:auto}.card{border:1px solid var(--line);background:#fff;border-radius:17px;padding:15px}.card h3{font-size:14px;margin:0 0 10px}.checklist{display:grid;gap:8px}.check{display:flex;gap:9px;align-items:flex-start;font-size:13px;line-height:1.45}.dot{width:18px;height:18px;border-radius:50%;background:#e4e9e5;display:grid;place-items:center;font-size:11px;flex:0 0 auto}.check.done .dot{background:var(--teal);color:#fff}.hint-box{font-size:13px;line-height:1.6;color:#4e5e64;min-height:46px}.hint-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.hint-btn{border:1px solid #ccd8d3;background:#f8fbf9;padding:9px;border-radius:11px;cursor:pointer;color:#2c6f69;font-weight:800}.primary{width:100%;border:0;background:var(--teal);color:#fff;padding:12px;border-radius:13px;font-weight:900;cursor:pointer}.primary:disabled{opacity:.35;cursor:not-allowed}.secondary{width:100%;border:1px solid var(--line);background:#fff;padding:11px;border-radius:13px;font-weight:800;cursor:pointer}.status{border-radius:14px;padding:12px;font-size:13px;line-height:1.55;background:#edf3ef}.status.error{background:#fae8e4;color:#8d3c2e}.status.success{background:#dcefe7;color:#175d4b}.quiz-options{display:grid;gap:8px}.quiz-option{border:1px solid var(--line);background:#fff;padding:11px;border-radius:12px;text-align:left;cursor:pointer}.quiz-option:hover{background:#f0f6f3}.quiz-option.correct{background:#dcefe7;border-color:#7db5a2}.quiz-option.wrong{background:#fae8e4;border-color:#d78f81}.badge-row{display:flex;gap:7px;flex-wrap:wrap}.badge{font-size:11px;background:#e8efec;padding:6px 8px;border-radius:999px;color:#42615d}.overlay{position:fixed;inset:0;background:rgba(20,30,35,.6);display:none;place-items:center;padding:20px;z-index:10}.overlay.show{display:grid}.modal{max-width:520px;background:#fffdf8;border-radius:24px;padding:28px;box-shadow:var(--shadow);text-align:center}.modal h2{font-size:28px;margin:0 0 10px}.modal p{color:var(--muted);line-height:1.65}.modal-actions{display:flex;gap:10px;margin-top:18px}.modal-actions button{flex:1}
+@media(max-width:1100px){.layout{grid-template-columns:220px 1fr}.right{grid-column:1/-1;max-height:none;display:grid;grid-template-columns:repeat(3,1fr)}.cube-net{transform:scale(.85);margin:-35px 0}.main{min-height:690px}}
+@media(max-width:760px){.app{padding:10px}.topbar{align-items:flex-start}.brand{font-size:18px}.layout{display:block}.sidebar{display:flex;gap:7px;overflow:auto;max-height:none;margin-bottom:10px;padding:10px}.chapter{display:none}.level-btn{min-width:150px}.main{padding:15px;min-height:620px}.mission-title{font-size:24px}.cube-stage{overflow:auto;display:block}.cube-net{transform:scale(.66);transform-origin:top left;width:592px;height:454px;margin:10px 0 -130px}.right{display:block;max-height:none;margin-top:10px}.card{margin-bottom:10px}.move{padding:8px 10px;min-width:40px}}
+
+/* Canvas cube */
+.cube-stage{min-height:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;overflow:hidden}
+.view-help{font-size:12px;color:var(--muted);background:rgba(255,255,255,.76);padding:7px 11px;border-radius:999px}
+.cube-canvas-wrap{width:min(100%,700px);height:460px;border-radius:20px;background:radial-gradient(circle at 50% 35%,#fffefb 0%,#f4f1e8 65%,#ece9df 100%);box-shadow:inset 0 0 0 1px rgba(33,49,58,.08);position:relative;overflow:hidden}
+#cubeCanvas{width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+#cubeCanvas.dragging{cursor:grabbing}
+.face-navigator{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}.face-view{border:1px solid #d5ddd8;background:#fff;padding:8px 10px;border-radius:999px;cursor:pointer;font-size:12px;color:#38525a;font-weight:800;display:flex;align-items:center;gap:7px}.face-view.active{background:#edf5f1;border-color:#79a99a;color:#1d665f}.face-swatch{width:14px;height:14px;border-radius:4px;border:1px solid rgba(0,0,0,.12)}
+.view-actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:center}.move-face{display:flex;align-items:center;gap:6px;background:#f5f8f6;border:1px solid #dde5df;border-radius:12px;padding:6px 8px}.move-face-label{font-size:12px;color:#6b7c81;font-weight:900;min-width:14px}.control-caption{font-size:12px;color:var(--muted);text-align:center;margin-bottom:10px}
+@media(max-width:1100px){.layout{grid-template-columns:220px 1fr}.right{grid-column:1/-1;max-height:none;display:grid;grid-template-columns:repeat(3,1fr)}.main{min-height:690px}.cube-canvas-wrap{height:420px}}
+@media(max-width:760px){.app{padding:10px}.topbar{align-items:flex-start}.brand{font-size:18px}.layout{display:block}.sidebar{display:flex;gap:7px;overflow:auto;max-height:none;margin-bottom:10px;padding:10px}.chapter{display:none}.level-btn{min-width:150px}.main{padding:15px;min-height:620px}.mission-title{font-size:24px}.right{display:block;max-height:none;margin-top:10px}.card{margin-bottom:10px}.move{padding:8px 10px;min-width:40px}.cube-canvas-wrap{height:360px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">8355 魔方任務<small>前 13 關互動教學原型</small></div>
+    <div class="progress-wrap"><div class="progress-label"><span id="progressText">關卡進度 0 / 13</span><span id="abilityText">觀察 0｜規劃 0｜操作 0</span></div><div class="progress"><div id="progressBar"></div></div></div>
+    <button class="reset" id="resetAll">清除紀錄</button>
+  </header>
+  <div class="layout">
+    <aside class="panel sidebar" id="levelList"></aside>
+    <main class="panel main">
+      <div class="mission-tag" id="missionTag"></div>
+      <h1 class="mission-title" id="missionTitle"></h1>
+      <div class="mission-desc" id="missionDesc"></div>
+      <div class="workspace-banner" id="workspaceBanner"><span class="workspace-icon"></span><span id="workspaceText"></span></div>
+      <section class="cube-stage">
+        <div class="view-help" id="viewHelp">拖曳魔方旋轉視角，點選貼紙完成辨識與闖關。鍵盤操作：方向鍵轉動視角，［／］逐格選取，Enter 確認。</div>
+        <div class="cube-canvas-wrap" id="cubeScene">
+          <canvas id="cubeCanvas" tabindex="0" aria-label="3D 魔術方塊互動畫布" aria-describedby="viewHelp" aria-keyshortcuts="ArrowUp ArrowDown ArrowLeft ArrowRight [ ] Enter"></canvas>
+        </div>
+        <div class="face-navigator" id="faceNavigator" aria-label="六面視角導覽"></div>
+        <div class="view-actions" id="viewActions">
+          <button class="utility" id="homeViewBtn">回到立體標準視角</button>
+          <button class="utility" id="rotateViewBtn">顯示中心標記</button>
+        </div>
+      </section>
+      <section class="controls" id="controlsPanel">
+        <div class="control-caption">選擇要轉動的面與方向</div>
+        <div class="move-row" id="moveButtons"></div>
+        <div class="utility-row"><button class="utility" id="undoBtn">復原一步</button><button class="utility" id="resetLevelBtn">重設本關</button></div>
+        <div class="timeline" id="timeline"><span class="empty">尚未執行轉動</span></div>
+      </section>
+    </main>
+    <aside class="panel right">
+      <section class="card" id="conditionsCard"><h3>過關條件</h3><div class="checklist" id="checklist"></div></section>
+      <section class="card" id="quizCard"><h3>思考任務</h3><div id="quizArea"></div></section>
+      <section class="card" id="hintCard"><h3>分層提示</h3><div class="hint-box" id="hintBox">先觀察目標塊、目標位置與可暫時移動的區域。</div><div class="hint-actions"><button class="hint-btn" data-hint="1">提示 1</button><button class="hint-btn" data-hint="2">提示 2</button><button class="hint-btn" data-hint="3">下一步</button><button class="hint-btn" data-hint="4">完整示範</button></div></section>
+      <section class="card" id="statusCard"><h3>本關狀態</h3><div class="status" id="statusBox">尚未開始。</div><div class="badge-row" id="badgeRow" style="margin-top:10px"></div></section>
+      <button class="primary" id="checkBtn">檢查結果</button>
+    </aside>
+  </div>
+</div>
+<div class="overlay" id="overlay"><div class="modal"><div style="font-size:54px">✓</div><h2 id="modalTitle">任務完成</h2><p id="modalText"></p><div class="modal-actions"><button class="secondary" id="stayBtn">留在本關</button><button class="primary" id="nextBtn">進入下一關</button></div></div></div>
+<script>
+const COLORS={U:'#f2cf3a',D:'#f7f4e9',F:'#42a66b',B:'#397bc2',R:'#d94d45',L:'#ef8d32'};
+const FACE_NAMES={U:'黃／上',D:'白／下',F:'綠／前',B:'藍／後',R:'紅／右',L:'橙／左'};
+let stickers=[];
+function makeSolved(){
+  stickers=[]; let id=0;
+  const add=(face,pos,normal)=>stickers.push({id:id++,color:face,pos:{...pos},normal:{...normal}});
+  for(let r=0;r<3;r++)for(let c=0;c<3;c++){
+    add('F',{x:c-1,y:1-r,z:1},{x:0,y:0,z:1});
+    add('B',{x:1-c,y:1-r,z:-1},{x:0,y:0,z:-1});
+    add('U',{x:c-1,y:1,z:r-1},{x:0,y:1,z:0});
+    add('D',{x:c-1,y:-1,z:1-r},{x:0,y:-1,z:0});
+    add('R',{x:1,y:1-r,z:1-c},{x:1,y:0,z:0});
+    add('L',{x:-1,y:1-r,z:c-1},{x:-1,y:0,z:0});
+  }
+}
+function rotVec(v,axis,q){ q=((q%4)+4)%4; let a={...v}; for(let i=0;i<q;i++){let {x,y,z}=a;if(axis==='x')a={x,y:-z,z:y};if(axis==='y')a={x:z,y,z:-x};if(axis==='z')a={x:-y,y:x,z};}return a; }
+function parseMove(m){let face=m[0], prime=m.includes("'"), twice=m.includes('2');return{face,prime,twice}}
+function applyMove(m,record=true,rerender=true){
+  const {face,prime,twice}=parseMove(m); const defs={U:['y',1],D:['y',-1],R:['x',1],L:['x',-1],F:['z',1],B:['z',-1]};
+  const [axis,sign]=defs[face]; let q=(-sign)*(prime?-1:1); let reps=twice?2:1;
+  for(let k=0;k<reps;k++) stickers.forEach(s=>{if(s.pos[axis]===sign){s.pos=rotVec(s.pos,axis,q);s.normal=rotVec(s.normal,axis,q)}});
+  if(record){moveHistory.push(m);stateHistory.push(cloneState());levelMoveCount++;}
+  if(rerender){renderCube();renderTimeline();updateLiveChecks();}
+}
+function inverseMove(m){if(m.includes('2'))return m;return m.includes("'")?m[0]:m[0]+"'"}
+function applySequence(seq,record=false){seq.filter(Boolean).forEach(m=>applyMove(m,record,false));renderCube();renderTimeline();updateLiveChecks()}
+function cloneState(){return stickers.map(s=>({id:s.id,color:s.color,pos:{...s.pos},normal:{...s.normal}}))}
+function restoreState(st){stickers=st.map(s=>({id:s.id,color:s.color,pos:{...s.pos},normal:{...s.normal}}));renderCube();updateLiveChecks()}
+function stateKey(){return stickers.slice().sort((a,b)=>a.id-b.id).map(s=>`${s.id}:${s.pos.x}${s.pos.y}${s.pos.z}:${s.normal.x}${s.normal.y}${s.normal.z}`).join('|')}
+function faceOfNormal(n){if(n.y===1)return'U';if(n.y===-1)return'D';if(n.z===1)return'F';if(n.z===-1)return'B';if(n.x===1)return'R';return'L'}
+function rcFor(face,p){if(face==='F')return[1-p.y,p.x+1];if(face==='B')return[1-p.y,1-p.x];if(face==='U')return[p.z+1,p.x+1];if(face==='D')return[1-p.z,p.x+1];if(face==='R')return[1-p.y,1-p.z];return[1-p.y,p.z+1]}
+function stickerAt(face,r,c){return stickers.find(s=>faceOfNormal(s.normal)===face&&rcFor(face,s.pos)[0]===r&&rcFor(face,s.pos)[1]===c)}
+let selectedIds=new Set(), classifiedPieceKeys=new Set(), workspaceLocations=new Set(), markMode=false;
+let viewX=-24,viewY=-36,isDragging=false,lastPointer={x:0,y:0},moveAnimating=false,dragMoved=false;
+let canvas,ctx,hitRegions=[],animState=null,keyboardStickerId=null;
+const VIEW_PRESETS={home:[-24,-36],U:[-89,0],D:[89,0],F:[0,0],B:[0,180],R:[0,-90],L:[0,90]};
+function deg2rad(d){return d*Math.PI/180}
+function rotateAroundX(p,deg){const a=deg2rad(deg),c=Math.cos(a),s=Math.sin(a);return{x:p.x,y:p.y*c-p.z*s,z:p.y*s+p.z*c}}
+function rotateAroundY(p,deg){const a=deg2rad(deg),c=Math.cos(a),s=Math.sin(a);return{x:p.x*c+p.z*s,y:p.y,z:-p.x*s+p.z*c}}
+function rotateAroundAxis(p,axis,deg){if(axis==='x')return rotateAroundX(p,deg);if(axis==='y')return rotateAroundY(p,deg);const a=deg2rad(deg),c=Math.cos(a),s=Math.sin(a);return{x:p.x*c-p.y*s,y:p.x*s+p.y*c,z:p.z}}
+function transformView(p){return rotateAroundX(rotateAroundY(p,viewY),viewX)}
+function transformNormal(n){return transformView(n)}
+function projectPoint(p,w,h){const cam=8, scale=Math.min(w,h)*0.92;const f=scale/(cam-p.z);return{x:w/2+p.x*f,y:h/2-p.y*f,z:p.z}}
+function quadFor(face,pos,size){const s=size;const x=pos.x,y=pos.y,z=pos.z;
+  if(face==='F')return[{x:x-s,y:y+s,z:1.5},{x:x+s,y:y+s,z:1.5},{x:x+s,y:y-s,z:1.5},{x:x-s,y:y-s,z:1.5}];
+  if(face==='B')return[{x:x+s,y:y+s,z:-1.5},{x:x-s,y:y+s,z:-1.5},{x:x-s,y:y-s,z:-1.5},{x:x+s,y:y-s,z:-1.5}];
+  if(face==='U')return[{x:x-s,y:1.5,z:z-s},{x:x+s,y:1.5,z:z-s},{x:x+s,y:1.5,z:z+s},{x:x-s,y:1.5,z:z+s}];
+  if(face==='D')return[{x:x-s,y:-1.5,z:z+s},{x:x+s,y:-1.5,z:z+s},{x:x+s,y:-1.5,z:z-s},{x:x-s,y:-1.5,z:z-s}];
+  if(face==='R')return[{x:1.5,y:y+s,z:z+s},{x:1.5,y:y+s,z:z-s},{x:1.5,y:y-s,z:z-s},{x:1.5,y:y-s,z:z+s}];
+  return[{x:-1.5,y:y+s,z:z-s},{x:-1.5,y:y+s,z:z+s},{x:-1.5,y:y-s,z:z+s},{x:-1.5,y:y-s,z:z-s}];
+}
+function pointInPoly(pt,poly){let inside=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const xi=poly[i].x,yi=poly[i].y,xj=poly[j].x,yj=poly[j].y;const inter=((yi>pt.y)!==(yj>pt.y))&&(pt.x<(xj-xi)*(pt.y-yi)/(yj-yi+1e-9)+xi);if(inter)inside=!inside}return inside}
+function resizeCanvas(){canvas=document.getElementById('cubeCanvas');ctx=canvas.getContext('2d');const ratio=window.devicePixelRatio||1;const rect=canvas.getBoundingClientRect();canvas.width=Math.max(320,Math.floor(rect.width*ratio));canvas.height=Math.max(260,Math.floor(rect.height*ratio));ctx.setTransform(ratio,0,0,ratio,0,0)}
+function stickerRenderData(s,w,h){const face=faceOfNormal(s.normal);const isMoving=animState&&s.pos[animState.axis]===animState.sign;const angle=isMoving?animState.currentDeg:0;const base=quadFor(face,s.pos,0.50).map(p=>isMoving?rotateAroundAxis(p,animState.axis,angle):p);const sticker=quadFor(face,s.pos,0.39).map(p=>isMoving?rotateAroundAxis(p,animState.axis,angle):p);let normal={...s.normal}; if(isMoving)normal=rotateAroundAxis(normal,animState.axis,angle);
+  const viewNormal=transformNormal(normal); if(viewNormal.z<=0.02)return null;
+  const base2=base.map(transformView); const sticker2=sticker.map(transformView);
+  const baseP=base2.map(p=>projectPoint(p,w,h)); const stickerP=sticker2.map(p=>projectPoint(p,w,h));
+  const depth=sticker2.reduce((a,p)=>a+p.z,0)/4; const [r,c]=rcFor(face,s.pos);
+  return {stickerObj:s,face,r,c,depth,baseP,stickerP,color:COLORS[s.color],selected:selectedIds.has(s.id),keyboardFocused:keyboardStickerId===s.id,center:r===1&&c===1,highlight:!!(currentLevelDef&&currentLevelDef.highlight&&currentLevelDef.highlight({face,r,c,s})),dim:!!(currentLevelDef&&currentLevelDef.dimOthers&&!currentLevelDef.highlight?.({face,r,c,s}))};
+}
+function drawPoly(poly,fill,stroke,lineWidth=1){ctx.beginPath();ctx.moveTo(poly[0].x,poly[0].y);for(let i=1;i<poly.length;i++)ctx.lineTo(poly[i].x,poly[i].y);ctx.closePath();if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lineWidth;ctx.stroke()}}
+function drawDashed(poly,color){ctx.save();ctx.setLineDash([6,5]);drawPoly(poly,null,color,2);ctx.restore()}
+function polyCenter(poly){return poly.reduce((a,p)=>({x:a.x+p.x/4,y:a.y+p.y/4}),{x:0,y:0})}
+function renderCube(){if(!canvas)resizeCanvas();const rect=canvas.getBoundingClientRect();const w=rect.width,h=rect.height;ctx.clearRect(0,0,w,h);hitRegions=[];
+  const items=stickers.map(s=>stickerRenderData(s,w,h)).filter(Boolean).sort((a,b)=>a.depth-b.depth);
+  items.forEach(item=>{ctx.globalAlpha=item.dim?0.28:1;drawPoly(item.baseP,'#1b2428','#0f1518',1.4);drawPoly(item.stickerP,item.color,'rgba(0,0,0,.22)',1);if(item.selected)drawPoly(item.stickerP,null,'#df8b38',4);if(item.keyboardFocused)drawPoly(item.stickerP,null,'#155fef',4);if(item.highlight)drawDashed(item.stickerP,'#183a37');if(markMode&&item.center){const c=polyCenter(item.stickerP);ctx.fillStyle='rgba(20,30,35,.76)';ctx.font='bold 12px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('中心',c.x,c.y)}ctx.globalAlpha=1;hitRegions.push({poly:item.stickerP,depth:item.depth,item})});
+  hitRegions.sort((a,b)=>b.depth-a.depth);updateFaceNavigator();
+}
+function buildFaceNavigator(){const nav=document.getElementById('faceNavigator');if(!nav)return;const order=['U','F','R','D','B','L'];nav.innerHTML=order.map(face=>`<button class="face-view" data-view="${face}"><span class="face-swatch" style="background:${COLORS[face]}"></span>${FACE_NAMES[face]}</button>`).join('');nav.querySelectorAll('.face-view').forEach(btn=>btn.onclick=()=>setFaceView(btn.dataset.view));}
+function setFaceView(face){[viewX,viewY]=VIEW_PRESETS[face];renderCube()}
+function updateFaceNavigator(){const close=(a,b)=>Math.abs(a-b)<1.5;document.querySelectorAll('.face-view').forEach(b=>{const f=b.dataset.view;const p=VIEW_PRESETS[f];b.classList.toggle('active',close(viewX,p[0])&&close((((viewY%360)+360)%360),(((p[1]%360)+360)%360)))});}
+function hitTest(x,y){for(const h of hitRegions){if(pointInPoly({x,y},h.poly))return h.item}return null}
+function positionKey(s){return `${s.pos.x},${s.pos.y},${s.pos.z}`}
+function cubieColors(s){const key=positionKey(s);return new Set(stickers.filter(x=>positionKey(x)===key).map(x=>x.color))}
+function selectKeyboardSticker(direction=1){const visible=hitRegions.map(h=>h.item);if(!visible.length)return;let index=visible.findIndex(item=>item.stickerObj.id===keyboardStickerId);index=(index+direction+visible.length)%visible.length;const item=visible[index];keyboardStickerId=item.stickerObj.id;renderCube();setStatus(`鍵盤選取：${FACE_NAMES[item.face]}面第 ${item.r+1} 列第 ${item.c+1} 行。按 Enter 確認。`)}
+function init3DInteraction(){canvas=document.getElementById('cubeCanvas');resizeCanvas();window.addEventListener('resize',()=>{resizeCanvas();renderCube()});canvas.addEventListener('focus',()=>{if(keyboardStickerId===null)selectKeyboardSticker()});canvas.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){viewY-=15;e.preventDefault();renderCube()}else if(e.key==='ArrowRight'){viewY+=15;e.preventDefault();renderCube()}else if(e.key==='ArrowUp'){viewX=Math.max(-89,viewX-15);e.preventDefault();renderCube()}else if(e.key==='ArrowDown'){viewX=Math.min(89,viewX+15);e.preventDefault();renderCube()}else if(e.key==='['){e.preventDefault();selectKeyboardSticker(-1)}else if(e.key===']'){e.preventDefault();selectKeyboardSticker(1)}else if(e.key==='Enter'){const hit=hitRegions.find(h=>h.item.stickerObj.id===keyboardStickerId);if(hit){e.preventDefault();handleStickerClick(hit.item.stickerObj,hit.item.face,hit.item.r,hit.item.c)}}});canvas.addEventListener('pointerdown',e=>{isDragging=true;dragMoved=false;lastPointer={x:e.offsetX,y:e.offsetY};canvas.classList.add('dragging');canvas.setPointerCapture(e.pointerId)});canvas.addEventListener('pointermove',e=>{if(!isDragging)return;const dx=e.offsetX-lastPointer.x,dy=e.offsetY-lastPointer.y;if(Math.abs(dx)+Math.abs(dy)>2)dragMoved=true;if(dragMoved){viewY+=dx*0.55;viewX=Math.max(-89,Math.min(89,viewX-dy*0.55));renderCube()}lastPointer={x:e.offsetX,y:e.offsetY}});const stop=e=>{if(!isDragging)return;canvas.classList.remove('dragging');const px=e.offsetX,py=e.offsetY;const wasDrag=dragMoved;isDragging=false;dragMoved=false;if(!wasDrag){const hit=hitTest(px,py);if(hit){keyboardStickerId=hit.item.stickerObj.id;handleStickerClick(hit.item.stickerObj,hit.item.face,hit.item.r,hit.item.c)}}};canvas.addEventListener('pointerup',stop);canvas.addEventListener('pointercancel',()=>{isDragging=false;dragMoved=false;canvas.classList.remove('dragging')});}
+function animateMove(m,done){if(moveAnimating)return;moveAnimating=true;const {face,prime,twice}=parseMove(m),defs={U:['y',1],D:['y',-1],R:['x',1],L:['x',-1],F:['z',1],B:['z',-1]};const [axis,sign]=defs[face];const quarter=(-sign)*(prime?-90:90);const targetDeg=quarter*(twice?2:1);const duration=320;const start=performance.now();animState={axis,sign,currentDeg:0};function frame(now){const t=Math.min(1,(now-start)/duration);const eased=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;animState.currentDeg=targetDeg*eased;renderCube();if(t<1)requestAnimationFrame(frame);else{animState=null;moveAnimating=false;renderCube();done&&done()}}requestAnimationFrame(frame)}
+
+const LEVELS=[
+{id:1,chapter:'第一章｜看懂魔方',title:'誰不會移動',sub:'辨認中心塊',tag:'結構辨識',desc:'點選六個面的中心塊。轉動面之後，中心塊仍決定該面的完成顏色。',workspace:'本關先建立最重要的定位規則：中心決定住所。',type:'select',goalCount:6,selectRule:({r,c})=>r===1&&c===1,checks:['找出六個中心塊','理解中心決定面色'],quiz:{q:'中心塊的主要作用是什麼？',opts:['決定該面的完成顏色','可以移動到任意位置','只用來裝飾'],answer:0},score:'observe'},
+{id:2,chapter:'第一章｜看懂魔方',title:'居民身分辨識',sub:'中心、邊、角',tag:'方塊分類',desc:'依序找出 1 個中心貼紙、4 個邊位置與 4 個角位置，建立「一色、兩色、三色」的身分概念。',workspace:'邊塊住在兩個中心交界；角塊住在三個中心交界。',type:'classification',checks:['完成中心辨識','完成邊位置辨識','完成角位置辨識'],quiz:{q:'白、紅、綠三色角塊的住所在哪裡？',opts:['白紅綠三個中心交界','白色面任一角落','紅色面任一位置'],answer:0},score:'observe'},
+{id:3,chapter:'第一章｜看懂魔方',title:'轉動語言',sub:'R、U、F 與反向',tag:'操作記號',desc:'依照題目執行轉動。順時針方向以正面看著該面為準；撇號代表逆時針。',workspace:'轉面會改變方塊狀態；整體換視角不應被記成一步。',type:'notation',sequence:['R',"R'",'U',"U'",'F',"F'"],checks:['完成 6 次指定操作','分辨順時針與逆時針'],quiz:{q:'R\' 代表什麼？',opts:['右面逆時針 90°','右面順時針 90°','整顆魔方向右轉'],answer:0},score:'operate'},
+{id:4,chapter:'第二章｜8 底區',title:'選擇底色',sub:'固定白底黃頂',tag:'建立基準',desc:'點選白色中心作為底面，再確認黃色中心位於相對面。第一版固定白底，降低初學負荷。',workspace:'固定基準後，後續所有「上、下、前、右」才有一致意義。',type:'selectColor',checks:['選定白色中心','確認黃色為相對色'],quiz:{q:'為什麼初學階段固定白色為底？',opts:['降低觀察與記憶負荷','白色轉得比較快','其他顏色不能當底'],answer:0},score:'plan'},
+{id:5,chapter:'第二章｜8 底區',title:'找到四個白色邊塊',sub:'建立目標清單',tag:'目標搜尋',desc:'點出四顆含白色的邊塊。每顆邊塊應由白色與另一個側面顏色共同辨識。',workspace:'先盤點目標，再開始轉動；不要看見白色就立刻亂轉。',type:'whiteEdges',checks:['找到白紅邊','找到白綠邊','找到白橙邊','找到白藍邊'],quiz:{q:'白紅邊塊的正確住所是？',opts:['白中心與紅中心交界','白色面任何邊格','紅色中心旁任何位置'],answer:0},score:'observe'},
+{id:6,chapter:'第二章｜8 底區',title:'建立白色十字',sub:'對齊側面中心',tag:'固定局面操作',desc:'依提示將訓練局面恢復為白色十字。過關時白色十字與四個側面中心都必須對齊。',workspace:'白色十字只是表面條件；側面顏色對齊才代表邊塊真的回到住所。',type:'sequence',scramble:['F','U','R'],solution:["R'","U'","F'"],checks:['完成白色十字','四個側面顏色對齊','沒有多餘操作'],quiz:{q:'只有白色十字，但側面未對齊，算完成嗎？',opts:['不算，邊塊仍在錯誤住所','算，白色朝下即可','只要三顆對齊就算'],answer:0},score:'operate'},
+{id:7,chapter:'第二章｜8 底區',title:'選定空槽',sub:'右前角維修入口',tag:'8355 核心',desc:'點選白底右前角作為工作區。這個角槽與其上方的中層邊槽，會成為後續交換通道。',workspace:'空槽不是未完成，而是刻意保留的操作資源。',type:'workspaceSelect',checks:['選中白底右前角','理解空槽必須保留'],quiz:{q:'空槽的功能是什麼？',opts:['提供方塊進出與交換的工作區','讓完成面看起來不完整','減少魔方總塊數'],answer:0},score:'plan',highlight:({face,r,c})=>face==='D'&&r===0&&c===2},
+{id:8,chapter:'第二章｜8 底區',title:'角塊入槽',sub:'打開、送入、恢復',tag:'短手順理解',desc:'執行 U R U\' R\'，觀察角塊如何經過工作區進入正確位置。',workspace:'不要只背四個符號；每一步分別負責打開、送入、關閉與恢復。',type:'sequence',scramble:['R','U',"R'","U'"],solution:['U','R',"U'","R'"],checks:['依序完成四步','角塊回到指定位置','已完成區恢復'],quiz:{q:'最後一步 R\' 的主要作用是？',opts:['關閉右側工作區並恢復結構','把整顆魔方轉向','建立黃色十字'],answer:0},score:'operate'},
+{id:9,chapter:'第二章｜8 底區',title:'守住空槽',sub:'三角完成、一角保留',tag:'策略判斷',desc:'依指定短序列處理角塊，完成後仍需指出哪一個角槽應保留為工作區。',workspace:'完成越多不一定越好；8355 的關鍵是保留可操作性。',type:'sequencePlusSelect',scramble:['U','R','U2',"R'"],solution:['R','U2',"R'","U'"],checks:['完成指定角塊調整','再次選定右前空槽','說明為何不能封閉空槽'],quiz:{q:'若提早完成空槽角塊，主要問題是？',opts:['後續缺少交換通道','魔方會永久損壞','中心塊會改變顏色'],answer:0},score:'plan'},
+{id:10,chapter:'第三章｜3 邊區',title:'空槽升級',sub:'辨認 L 形工作區',tag:'工作區擴張',desc:'點選底層空角與它正上方的中層邊位置，組成 L 形工作區。',workspace:'中層階段的空槽不是單一格，而是底角加上方邊槽的組合。',type:'Lworkspace',checks:['選中底層右前角','選中右前中層邊槽'],quiz:{q:'L 形工作區包含哪兩個位置？',opts:['底層空角與其上方中層邊槽','兩個中心塊','頂層兩個角落'],answer:0},score:'observe',highlight:({face,r,c})=>(face==='D'&&r===0&&c===2)||(face==='F'&&r===1&&c===2)||(face==='R'&&r===1&&c===0)},
+{id:11,chapter:'第三章｜3 邊區',title:'目標邊塊的住所',sub:'以兩色定位',tag:'住所判斷',desc:'找出橙藍邊塊，並判斷它應位於橙色中心與藍色中心的交界。',workspace:'先回答「它住哪裡」，才回答「它怎麼走」。',type:'targetEdge',checks:['找到橙藍邊塊','指出橙藍中心交界','不以單一顏色判斷'],quiz:{q:'判斷中層邊塊住所時，需要看幾種顏色？',opts:['兩種','一種','三種'],answer:0},score:'observe'},
+{id:12,chapter:'第三章｜3 邊區',title:'把住所搬到空槽',sub:'先搬位置，再送方塊',tag:'核心策略',desc:'依序操作 U、R、U\'、R\'，把目標住所帶到工作區，再完成交換與恢復。',workspace:'這一關的主角不是目標塊，而是「目標住所」的移動。',type:'sequence',scramble:['R','U',"R'","U'"],solution:['U','R',"U'","R'"],checks:['住所移到工作區','目標塊完成交換','中層基準恢復'],quiz:{q:'為何先把住所搬到空槽？',opts:['讓目標塊能從工作區進入正確位置','讓中心塊交換位置','避免使用任何轉動'],answer:0},score:'plan'},
+{id:13,chapter:'第三章｜3 邊區',title:'三邊連續任務',sub:'提示逐步淡出',tag:'章末挑戰',desc:'完成一組 8 步訓練序列。提示只顯示下一步，不自動播放；完成後檢查工作區仍可辨認。',workspace:'真正的過關標準：完成目標邊、恢復已完成區、保留工作區。',type:'sequence',scramble:['U','R','U2',"R'","U'",'F','U',"F'"],solution:['F',"U'","F'",'U','R','U2',"R'","U'"],checks:['完成三邊訓練序列','已完成區恢復','仍能指出工作區'],quiz:{q:'中層邊塊完成後，還要檢查什麼？',opts:['底層與工作區是否恢復','只看轉動步數','中心塊是否換位'],answer:0},score:'operate'}
+];
+let currentLevel=1,currentLevelDef=null,completed=new Set(JSON.parse(localStorage.getItem('cube8355_completed')||'[]')),abilities=JSON.parse(localStorage.getItem('cube8355_abilities')||'{"observe":0,"plan":0,"operate":0}');
+let moveHistory=[],stateHistory=[],startState=[],targetKey='',levelMoveCount=0,quizCorrect=false,notationIndex=0,classification={center:0,edge:0,corner:0},hintUsed=0,extraSelection=false;
+function buildLevelList(){const el=document.getElementById('levelList');el.innerHTML='';let last='';LEVELS.forEach(l=>{if(l.chapter!==last){const h=document.createElement('div');h.className='chapter';h.textContent=l.chapter;el.appendChild(h);last=l.chapter}const b=document.createElement('button');b.className='level-btn'+(l.id===currentLevel?' active':'')+(completed.has(l.id)?' done':'');b.innerHTML=`<span class="level-num">${completed.has(l.id)?'✓':l.id}</span><span><div class="level-name">${l.title}</div><div class="level-sub">${l.sub}</div></span>`;b.onclick=()=>loadLevel(l.id);el.appendChild(b)})}
+function loadLevel(id){currentLevel=id;currentLevelDef=LEVELS[id-1];selectedIds.clear();classifiedPieceKeys.clear();workspaceLocations.clear();keyboardStickerId=null;markMode=false;moveHistory=[];stateHistory=[];levelMoveCount=0;quizCorrect=false;notationIndex=0;classification={center:0,edge:0,corner:0};hintUsed=0;extraSelection=false;makeSolved();if(currentLevelDef.scramble)applySequence(currentLevelDef.scramble,false);startState=cloneState();stateHistory=[cloneState()];
+  if(currentLevelDef.type==='sequence'||currentLevelDef.type==='sequencePlusSelect'){let temp=cloneState();applySequence(currentLevelDef.solution,false);targetKey=stateKey();restoreState(temp)}else targetKey='';
+  document.getElementById('missionTag').textContent=`第 ${id} 關｜${currentLevelDef.tag}`;document.getElementById('missionTitle').textContent=currentLevelDef.title;document.getElementById('missionDesc').textContent=currentLevelDef.desc;document.getElementById('workspaceText').textContent=currentLevelDef.workspace;document.getElementById('hintBox').textContent='先觀察目標塊、目標位置與可暫時移動的區域。';document.getElementById('statusBox').className='status';document.getElementById('statusBox').textContent='尚未開始。';
+  buildLevelList();renderCube();renderMoves();renderQuiz();renderChecklist();renderTimeline();renderBadges();updateProgress();updateContextualUI();
+}
+function isOperationLevel(){return ['notation','sequence','sequencePlusSelect'].includes(currentLevelDef.type)}
+function renderMoves(){
+  const el=document.getElementById('moveButtons');el.innerHTML='';
+  if(!isOperationLevel())return;
+  const source=currentLevelDef.type==='notation'?currentLevelDef.sequence:(currentLevelDef.solution||[]);
+  const faces=[...new Set(source.map(x=>x[0]))];
+  faces.forEach(f=>{
+    const group=document.createElement('div');group.className='move-face';
+    const label=document.createElement('span');label.className='move-face-label';label.textContent=f;group.appendChild(label);
+    const candidates=[f,f+"'",f+'2'].filter((x,i,a)=>source.includes(x)||i<2);
+    [...new Set(candidates)].forEach(m=>{const b=document.createElement('button');b.className='move';b.textContent=m;b.onclick=()=>handleMove(m);group.appendChild(b)});
+    el.appendChild(group);
+  });
+}
+function commitAnimatedMove(m,after){
+  if(moveAnimating)return;
+  animateMove(m,()=>{applyMove(m,false);moveHistory.push(m);stateHistory.push(cloneState());levelMoveCount++;renderTimeline();updateLiveChecks();after&&after()});
+}
+function handleMove(m){
+  if(currentLevelDef.type==='notation'){
+    const expected=currentLevelDef.sequence[notationIndex];
+    if(m!==expected){setStatus(`目前應執行 ${expected}，你選擇了 ${m}。`,true);return}
+    commitAnimatedMove(m,()=>{notationIndex++;setStatus(`完成 ${notationIndex} / ${currentLevelDef.sequence.length} 次指定操作。`);updateLiveChecks()});
+  }else{
+    const expected=currentLevelDef.solution?.[moveHistory.length];
+    commitAnimatedMove(m,()=>{if(expected&&m===expected)setStatus(`第 ${moveHistory.length} 步正確。`);else if(expected)setStatus('這一步與訓練路徑不同。可復原一步或自行修正。',true);updateLiveChecks()});
+  }
+}
+function pieceType(s){let zeros=[s.pos.x,s.pos.y,s.pos.z].filter(v=>v===0).length;return zeros===2?'center':zeros===1?'edge':'corner'}
+function handleStickerClick(s,face,r,c){const t=currentLevelDef.type;
+  if(t==='select'){if(currentLevelDef.selectRule({s,face,r,c})){selectedIds.add(s.id);setStatus(`已找到 ${selectedIds.size} / 6 個中心塊。`)}else setStatus('這不是中心位置。中心位於每一面正中央。',true)}
+  else if(t==='classification'){let p=pieceType(s),key=`${p}:${positionKey(s)}`;if(!classifiedPieceKeys.has(key)){classifiedPieceKeys.add(key);classification[p]++;selectedIds.add(s.id);setStatus(`目前辨識：中心 ${classification.center}、邊 ${classification.edge}、角 ${classification.corner}。`)}else setStatus('這個實體方塊已辨識過，請選擇不同位置。',true)}
+  else if(t==='selectColor'){if(s.color==='D'&&r===1&&c===1){selectedIds.add(s.id);setStatus('已選定白色中心為底面。')}else setStatus('請選擇白色中心，而不是白色角塊或邊塊。',true)}
+  else if(t==='whiteEdges'){if(s.color==='D'&&pieceType(s)==='edge'){selectedIds.add(s.id);setStatus(`已找到 ${selectedIds.size} / 4 顆白色邊塊。`)}else setStatus('請選擇含白色的邊塊貼紙。',true)}
+  else if(t==='workspaceSelect'){if(face==='D'&&r===0&&c===2){selectedIds.add(s.id);setStatus('已選定白底右前角作為空槽。')}else setStatus('工作區設定為白底右前角。',true)}
+  else if(t==='sequencePlusSelect'){if(face==='D'&&r===0&&c===2){extraSelection=true;selectedIds.add(s.id);setStatus('已再次確認右前空槽。')}else setStatus('請指出白底右前角工作區。',true)}
+  else if(t==='Lworkspace'){let location=(face==='D'&&r===0&&c===2)?'corner':((face==='F'&&r===1&&c===2)||(face==='R'&&r===1&&c===0))?'edge':'';if(location){workspaceLocations.add(location);selectedIds.add(s.id);setStatus(`已標示 ${workspaceLocations.has('corner')?'底層空角':'中層邊槽'}；仍需找到 ${workspaceLocations.has('corner')&&workspaceLocations.has('edge')?'概念題答案':'另一個工作區位置'}。`)}else setStatus('請選擇右前底角或其上方中層邊槽。',true)}
+  else if(t==='targetEdge'){const colors=cubieColors(s);if(pieceType(s)==='edge'&&colors.size===2&&colors.has('L')&&colors.has('B')){selectedIds.add(s.id);setStatus('已標示橙藍邊塊。請完成住所判斷。')}else setStatus('目標是同時含橙色與藍色的同一顆邊塊。',true)}
+  renderCube();updateLiveChecks(); }
+function renderQuiz(){const q=currentLevelDef.quiz;const a=document.getElementById('quizArea');a.innerHTML=`<div style="font-size:13px;line-height:1.55;margin-bottom:10px">${q.q}</div><div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-option" data-i="${i}">${o}</button>`).join('')}</div>`;a.querySelectorAll('.quiz-option').forEach(b=>b.onclick=()=>{a.querySelectorAll('.quiz-option').forEach(x=>x.classList.remove('correct','wrong'));let i=+b.dataset.i;if(i===q.answer){b.classList.add('correct');quizCorrect=true;setStatus('概念判斷正確。')}else{b.classList.add('wrong');quizCorrect=false;setStatus('此判斷無法解釋目前策略。重新比對目標塊、住所與工作區。',true)}updateLiveChecks()})}
+function conditionStates(){const t=currentLevelDef.type;let arr=[];
+ if(t==='select')arr=[selectedIds.size>=6,quizCorrect];
+ if(t==='classification')arr=[classification.center>=1,classification.edge>=4,classification.corner>=4];
+ if(t==='notation')arr=[notationIndex>=6,quizCorrect];
+ if(t==='selectColor')arr=[selectedIds.size>=1,quizCorrect];
+ if(t==='whiteEdges')arr=[selectedIds.size>=4,quizCorrect,selectedIds.size>=4,selectedIds.size>=4];
+ if(t==='sequence')arr=[stateKey()===targetKey,moveHistory.length<=currentLevelDef.solution.length+2,quizCorrect];
+ if(t==='workspaceSelect')arr=[selectedIds.size>=1,quizCorrect];
+ if(t==='sequencePlusSelect')arr=[stateKey()===targetKey,extraSelection,quizCorrect];
+ if(t==='Lworkspace')arr=[workspaceLocations.has('corner'),workspaceLocations.has('edge')&&quizCorrect];
+ if(t==='targetEdge')arr=[selectedIds.size>=1,quizCorrect,quizCorrect];
+ return arr; }
+function renderChecklist(){const states=conditionStates();document.getElementById('checklist').innerHTML=currentLevelDef.checks.map((c,i)=>`<div class="check ${states[i]?'done':''}"><span class="dot">${states[i]?'✓':'·'}</span><span>${c}</span></div>`).join('')}
+function updateLiveChecks(){renderChecklist();renderBadges();updateContextualUI()}
+function updateContextualUI(){
+  const operation=isOperationLevel();
+  document.getElementById('controlsPanel').hidden=!operation;
+  document.getElementById('hintCard').hidden=!operation;
+  document.getElementById('viewHelp').hidden=false;
+  document.getElementById('undoBtn').hidden=!operation||moveHistory.length===0;
+  document.getElementById('resetLevelBtn').hidden=!operation||moveHistory.length===0;
+  document.getElementById('rotateViewBtn').hidden=![1,4].includes(currentLevel);
+  const ready=allPassed();
+  const check=document.getElementById('checkBtn');check.hidden=!ready;
+  check.textContent=operation?'檢查結果並過關':'完成本關';
+  document.getElementById('statusCard').hidden=false;
+}
+function renderTimeline(){const el=document.getElementById('timeline');el.innerHTML=moveHistory.length?moveHistory.map((m,i)=>`<span class="step">${i+1}. ${m}</span>`).join(''):'<span class="empty">尚未執行轉動</span>'}
+function renderBadges(){let badges=[];if(hintUsed===0)badges.push('尚未使用提示');else badges.push(`已用提示 ${hintUsed}`);badges.push(`轉動 ${levelMoveCount} 步`);if(quizCorrect)badges.push('概念檢核完成');document.getElementById('badgeRow').innerHTML=badges.map(x=>`<span class="badge">${x}</span>`).join('')}
+function setStatus(msg,err=false){const s=document.getElementById('statusBox');s.textContent=msg;s.className='status'+(err?' error':'')}
+function allPassed(){return conditionStates().every(Boolean)}
+function completeLevel(){if(!allPassed()){setStatus('尚未同時滿足操作結果與概念檢核。',true);return}if(!completed.has(currentLevel)){completed.add(currentLevel);abilities[currentLevelDef.score]=Math.min(100,abilities[currentLevelDef.score]+8);localStorage.setItem('cube8355_completed',JSON.stringify([...completed]));localStorage.setItem('cube8355_abilities',JSON.stringify(abilities))}updateProgress();buildLevelList();document.getElementById('modalTitle').textContent=`第 ${currentLevel} 關完成`;document.getElementById('modalText').textContent=`你已完成「${currentLevelDef.title}」。本關使用 ${levelMoveCount} 次轉動、${hintUsed} 次提示。`;document.getElementById('nextBtn').style.display=currentLevel<13?'block':'none';document.getElementById('overlay').classList.add('show')}
+function updateProgress(){document.getElementById('progressText').textContent=`關卡進度 ${completed.size} / 13`;document.getElementById('progressBar').style.width=`${completed.size/13*100}%`;document.getElementById('abilityText').textContent=`觀察 ${abilities.observe}｜規劃 ${abilities.plan}｜操作 ${abilities.operate}`}
+function showHint(n){hintUsed++;let text='';if(n===1)text='注意力提示：先找目標塊，再找它應位於哪些中心塊的交界。';if(n===2)text='方向提示：工作區固定在白底右前方。先讓住所靠近工作區。';if(n===3){let next=currentLevelDef.solution?.[moveHistory.length]||currentLevelDef.sequence?.[notationIndex];text=next?`下一步需要操作：${next}`:'本關沒有固定下一步，先完成選取或概念判斷。'}if(n===4){text=currentLevelDef.solution?`完整訓練序列：${currentLevelDef.solution.join(' → ')}`:'完整示範：中心在面中央；邊在兩面交界；角在三面交界。'}document.getElementById('hintBox').textContent=text;renderBadges()}
+document.querySelectorAll('.hint-btn').forEach(b=>b.onclick=()=>showHint(+b.dataset.hint));
+document.getElementById('undoBtn').onclick=()=>{if(moveHistory.length){moveHistory.pop();stateHistory.pop();restoreState(stateHistory[stateHistory.length-1]);levelMoveCount=Math.max(0,levelMoveCount-1);renderTimeline();setStatus('已復原一步。')}};
+document.getElementById('resetLevelBtn').onclick=()=>loadLevel(currentLevel);
+document.getElementById('rotateViewBtn').onclick=()=>{markMode=!markMode;document.getElementById('rotateViewBtn').textContent=markMode?'隱藏中心標記':'顯示中心標記';renderCube()};
+document.getElementById('homeViewBtn').onclick=()=>{viewX=-27;viewY=-38;renderCube()};
+document.getElementById('checkBtn').onclick=completeLevel;
+document.getElementById('stayBtn').onclick=()=>document.getElementById('overlay').classList.remove('show');
+document.getElementById('nextBtn').onclick=()=>{document.getElementById('overlay').classList.remove('show');loadLevel(Math.min(13,currentLevel+1))};
+document.getElementById('resetAll').onclick=()=>{if(!confirm('確定要清除所有關卡進度嗎？'))return;localStorage.removeItem('cube8355_completed');localStorage.removeItem('cube8355_abilities');completed.clear();abilities={observe:0,plan:0,operate:0};loadLevel(1)};
+buildFaceNavigator();
+init3DInteraction();
+loadLevel(1);
+</script>
+</body>
+</html>
