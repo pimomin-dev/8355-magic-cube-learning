@@ -214,8 +214,7 @@ function handleMove(m){
     if(m!==expected){setStatus(`目前應執行 ${expected}，你選擇了 ${m}。`,true);return}
     commitAnimatedMove(m,()=>{notationIndex++;setStatus(`完成 ${notationIndex} / ${currentLevelDef.sequence.length} 次指定操作。`);updateLiveChecks()});
   }else{
-    if(currentLevelDef.requiresFrontColor&&!frontColorSelected){setStatus('請先點選前面正中央的綠色中心，選定前方顏色。',true);return}
-    if(currentLevelDef.free8355){if(!frontFace){const names=['綠色','橙色','藍色'];setStatus(`請先點選${names[middleThreeStage]}中心，設定本輪前方。`,true);return}commitAnimatedMove(m,()=>{const before=middleThreeStage;if(advanceMiddleThreeStage()){const names=['綠橙','橙藍','藍紅'];setStatus(`第 ${middleThreeStage} 輪完成：${names[middleThreeStage-1]}邊已回到住所。${middleThreeStage<3?`下一輪請先設定${['橙色','藍色'][middleThreeStage-1]}中心為前方。`:''}`)}else setStatus(`自由調整中：目前以${FACE_NAMES[frontFace].split('／')[0]}為前方，讓本輪目標邊回到第二層住所。`);updateLiveChecks()});return}
+    if(currentLevelDef.free8355){if(!frontFace){commitAnimatedMove(m,()=>{const names=['綠色','橙色','藍色'];setStatus(`已執行 ${m}。可繼續自由轉動；要認列第 ${middleThreeStage+1} 輪完成前，請點選${names[middleThreeStage]}中心設定前方。`);updateLiveChecks()});return}commitAnimatedMove(m,()=>{const before=middleThreeStage;if(advanceMiddleThreeStage()){const names=['綠橙','橙藍','藍紅'];setStatus(`第 ${middleThreeStage} 輪完成：${names[middleThreeStage-1]}邊已回到住所。${middleThreeStage<3?`下一輪請先設定${['橙色','藍色'][middleThreeStage-1]}中心為前方。`:''}`)}else setStatus(`自由調整中：目前以${FACE_NAMES[frontFace].split('／')[0]}為前方，讓本輪目標邊回到第二層住所。`);updateLiveChecks()});return}
     const expected=currentLevelDef.solution?.[moveHistory.length];
     const requireFormulaOrder=['middleRight','middleBoth','keyholeTarget','middleThree'].includes(currentLevelDef.successCheck);
     if(requireFormulaOrder&&expected&&m!==expected){setStatus(`8355 工作區流程尚未到這一步；目前應按 ${expected==='u'?'上＋中層一起轉（u）':expected}。`,true);return}
